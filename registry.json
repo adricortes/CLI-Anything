@@ -2,7 +2,7 @@
   "meta": {
     "repo": "https://github.com/HKUDS/CLI-Anything",
     "description": "CLI-Hub — Agent-native stateful CLI interfaces for softwares, codebases, and Web Services",
-    "updated": "2026-03-17"
+    "updated": "2026-03-18"
   },
   "clis": [
     {
@@ -124,6 +124,18 @@
       "entry_point": "cli-anything-mermaid",
       "skill_md": null,
       "category": "diagrams"
+    },
+    {
+      "name": "ollama",
+      "display_name": "Ollama",
+      "version": "1.0.1",
+      "description": "Local LLM inference and model management via Ollama REST API",
+      "requires": "Ollama running at http://localhost:11434",
+      "homepage": "https://ollama.com",
+      "install_cmd": "pip install git+https://github.com/HKUDS/CLI-Anything.git#subdirectory=ollama/agent-harness",
+      "entry_point": "cli-anything-ollama",
+      "skill_md": "ollama/agent-harness/cli_anything/ollama/skills/SKILL.md",
+      "category": "ai"
     },
     {
       "name": "obs-studio",
