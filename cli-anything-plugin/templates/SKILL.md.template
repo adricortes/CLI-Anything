@@ -14,11 +14,12 @@ description: >-
 This CLI is installed as part of the cli-anything-{{ software_name }} package:
 
 ```bash
-pip install cli-anything-{{ software_name }}
+uv tool install cli-anything-{{ software_name }}
 ```
 
 **Prerequisites:**
 - Python 3.10+
+- uv ([install](https://docs.astral.sh/uv/getting-started/installation/))
 - {{ software_name }} must be installed on your system
 {% if system_package %}
 - Install {{ software_name }}: `{{ system_package }}`

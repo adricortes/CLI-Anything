@@ -74,7 +74,7 @@ This command implements the complete cli-anything methodology to build a product
 - Package name: `cli-anything-<software>`, namespace: `cli_anything.<software>`
 - `cli_anything/` has NO `__init__.py` (PEP 420 namespace package)
 - Configures console_scripts entry point for PATH installation
-- Tests local installation with `pip install -e .`
+- Tests local installation with `uv tool install --editable .`
 - Verifies CLI is available in PATH: `which cli-anything-<software>`
 
 ## Output Structure

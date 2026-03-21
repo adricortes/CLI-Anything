@@ -75,7 +75,8 @@ check_package "pytest" || MISSING_PACKAGES+=("pytest")
 if [ ${#MISSING_PACKAGES[@]} -gt 0 ]; then
     echo ""
     echo -e "${YELLOW}Missing packages: ${MISSING_PACKAGES[*]}${NC}"
-    echo -e "${YELLOW}Install with: pip install ${MISSING_PACKAGES[*]}${NC}"
+    echo -e "${YELLOW}Install with: uv tool install ${MISSING_PACKAGES[*]}${NC}"
+    echo -e "${YELLOW}(or: pip install ${MISSING_PACKAGES[*]})${NC}"
 fi
 
 echo ""

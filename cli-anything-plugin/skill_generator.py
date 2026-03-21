@@ -370,11 +370,12 @@ def generate_skill_md_simple(metadata: SkillMetadata) -> str:
         f"This CLI is installed as part of the cli-anything-{metadata.software_name} package:",
         "",
         f"```bash",
-        f"pip install cli-anything-{metadata.software_name}",
+        f"uv tool install cli-anything-{metadata.software_name}",
         f"```",
         "",
         "**Prerequisites:**",
         "- Python 3.10+",
+        "- uv ([install](https://docs.astral.sh/uv/getting-started/installation/))",
         f"- {_format_display_name(metadata.software_name)} must be installed on your system",
     ]
 

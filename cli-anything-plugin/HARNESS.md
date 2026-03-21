@@ -175,7 +175,7 @@ Now write the actual test code based on the TEST.md plan:
            print(f"[_resolve_cli] Using installed command: {path}")
            return [path]
        if force:
-           raise RuntimeError(f"{name} not found in PATH. Install with: pip install -e .")
+           raise RuntimeError(f"{name} not found in PATH. Install with: uv tool install --editable .")
        module = name.replace("cli-anything-", "cli_anything.") + "." + name.split("-")[-1] + "_cli"
        print(f"[_resolve_cli] Falling back to: {sys.executable} -m {module}")
        return [sys.executable, "-m", module]
@@ -258,7 +258,7 @@ See [`guides/skill-generation.md`](guides/skill-generation.md) for the full gene
 process, template customization options, and manual generation commands.
 
 **Output Location:** SKILL.md lives inside the Python package at
-`cli_anything/<software>/skills/SKILL.md` so it is installed with `pip install`.
+`cli_anything/<software>/skills/SKILL.md` so it is installed with `uv tool install`.
 
 **Key Principles:**
 
