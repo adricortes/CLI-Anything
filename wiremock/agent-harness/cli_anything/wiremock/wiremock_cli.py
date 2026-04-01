@@ -123,7 +123,15 @@ def stub_get(ctx, stub_id):
     json_mode = ctx.meta.get("json_mode", False)
     try:
         data = StubsManager(client).get(stub_id)
-        print_json(data)
+        if json_mode:
+            print_json(data)
+        else:
+            success(
+                f"Stub {data.get('id', stub_id)[:8]}... "
+                f"{data.get('request', {}).get('method', '')} "
+                f"{data.get('request', {}).get('url', '')}",
+                data,
+            )
     except Exception as e:
         error(str(e), json_mode)
 
@@ -137,7 +145,7 @@ def stub_create(ctx, mapping_json):
     json_mode = ctx.meta.get("json_mode", False)
     try:
         if mapping_json.startswith("@"):
-            with open(mapping_json[1:]) as f:
+            with open(mapping_json[1:], encoding="utf-8") as f:
                 mapping = json.load(f)
         else:
             mapping = json.loads(mapping_json)
@@ -228,7 +236,7 @@ def stub_import(ctx, file_path):
     client = ctx.obj
     json_mode = ctx.meta.get("json_mode", False)
     try:
-        with open(file_path) as f:
+        with open(file_path, encoding="utf-8") as f:
             data = json.load(f)
         result = StubsManager(client).import_stubs(data)
         if json_mode:
@@ -291,7 +299,23 @@ def request_find(ctx, pattern_json):
     try:
         pattern = json.loads(pattern_json)
         data = RequestsLog(client).find(pattern)
-        print_json(data)
+        if json_mode:
+            print_json(data)
+        else:
+            requests_list = data.get("requests", [])
+            rows = [
+                (
+                    r.get("request", {}).get("method", ""),
+                    r.get("request", {}).get("url", ""),
+                    r.get("responseDefinition", {}).get("status", ""),
+                )
+                for r in requests_list
+            ]
+            print_table(
+                ["Method", "URL", "Status"],
+                rows,
+                title=f"Matching requests ({len(requests_list)})",
+            )
     except Exception as e:
         error(str(e), json_mode)
 
@@ -322,7 +346,22 @@ def request_unmatched(ctx):
     json_mode = ctx.meta.get("json_mode", False)
     try:
         data = RequestsLog(client).unmatched()
-        print_json(data)
+        if json_mode:
+            print_json(data)
+        else:
+            requests_list = data.get("requests", [])
+            rows = [
+                (
+                    r.get("request", {}).get("method", ""),
+                    r.get("request", {}).get("url", ""),
+                )
+                for r in requests_list
+            ]
+            print_table(
+                ["Method", "URL"],
+                rows,
+                title=f"Unmatched requests ({len(requests_list)})",
+            )
     except Exception as e:
         error(str(e), json_mode)
 
