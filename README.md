@@ -634,8 +634,8 @@ An agent uses the VideoCaptioner CLI to automatically generate and overlay style
 
 <table align="center">
 <tr>
-<td align="center"><strong>Before</strong></td>
-<td align="center"><strong>After</strong></td>
+<td align="center"><strong>Sub A</strong></td>
+<td align="center"><strong>Sub B</strong></td>
 </tr>
 <tr>
 <td><img src="examples/videocaptioner/videocaptioner_before.png" alt="Video frame before captioning" width="380" /></td>
