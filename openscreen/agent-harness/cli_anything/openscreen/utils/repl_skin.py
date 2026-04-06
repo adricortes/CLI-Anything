@@ -459,6 +459,26 @@ class ReplSkin:
             raw_prompt = self.prompt(project_name, modified, context)
             return input(raw_prompt).strip()
 
+    # ── Sub-prompt input ────────────────────────────────────────────
+
+    def sub_input(self, prompt_text: str, pt_session=None) -> str:
+        """Get input for a sub-prompt (e.g., parameter entry in add flows).
+
+        Uses prompt_toolkit if a session is available, otherwise falls back
+        to plain input(). This preserves history and styling consistency.
+
+        Args:
+            prompt_text: The prompt to display (e.g., "  start_ms: ").
+            pt_session: An optional prompt_toolkit PromptSession.
+
+        Returns:
+            User input string (stripped).
+        """
+        if pt_session is not None:
+            return pt_session.prompt(prompt_text).strip()
+        else:
+            return input(prompt_text).strip()
+
     # ── Toolbar builder ───────────────────────────────────────────────
 
     def bottom_toolbar(self, items: dict[str, str]):

@@ -178,6 +178,6 @@ For speeds outside atempo's 0.5-2.0 range, filters are chained.
 
 ## Test Coverage
 
-**47 total tests** across two suites:
-- `test_core.py` (35 tests): Session, project, zoom, speed, trim, crop, annotation, integration
-- `test_full_e2e.py` (12 tests): Real ffmpeg rendering, CLI subprocess, media probing
+**101 total tests** across two suites:
+- `test_core.py` (78 tests): Session, project, zoom, speed, trim, crop, annotation, integration
+- `test_full_e2e.py` (23 tests): Real ffmpeg rendering, CLI subprocess, media probing

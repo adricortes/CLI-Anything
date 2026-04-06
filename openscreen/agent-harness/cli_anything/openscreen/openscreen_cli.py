@@ -6,6 +6,7 @@ trim, crop, annotations, backgrounds, and export polished demo videos.
 Built on the Openscreen JSON project format with ffmpeg as the rendering backend.
 """
 
+import functools
 import json
 import os
 import sys
@@ -71,6 +72,7 @@ def _print_list(items: list):
 
 def handle_error(func):
     """Decorator to catch and format errors."""
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -102,8 +104,6 @@ def handle_error(func):
                 click.echo(f"Unexpected error: {e}", err=True)
             if not _repl_mode:
                 sys.exit(1)
-    wrapper.__name__ = func.__name__
-    wrapper.__doc__ = func.__doc__
     return wrapper
 
 
@@ -168,7 +168,7 @@ def project_open(path):
 
 
 @project.command("save")
-@click.option("-o", "--output", default=None, help="Save to path (default: current)")
+@click.option("-o", "--output", "output_path", default=None, help="Save to path (default: current)")
 @handle_error
 def project_save(output_path=None):
     """Save the current project."""
@@ -660,21 +660,21 @@ def repl():
                 skin.success(f"{parts[1]} = {val}")
 
             elif cmd == "zoom":
-                _repl_zoom(parts[1:], skin)
+                _repl_zoom(parts[1:], skin, pt_session)
 
             elif cmd == "speed":
-                _repl_speed(parts[1:], skin)
+                _repl_speed(parts[1:], skin, pt_session)
 
             elif cmd == "trim":
-                _repl_trim(parts[1:], skin)
+                _repl_trim(parts[1:], skin, pt_session)
 
             elif cmd == "crop":
                 if len(parts) > 1 and parts[1] == "set":
                     skin.info("Enter crop (normalized 0-1):")
-                    x = float(input("  x: ") or "0")
-                    y = float(input("  y: ") or "0")
-                    w = float(input("  width: ") or "1")
-                    h = float(input("  height: ") or "1")
+                    x = float(skin.sub_input("  x: ", pt_session) or "0")
+                    y = float(skin.sub_input("  y: ", pt_session) or "0")
+                    w = float(skin.sub_input("  width: ", pt_session) or "1")
+                    h = float(skin.sub_input("  height: ", pt_session) or "1")
                     tl_mod.set_crop(_session, x, y, w, h)
                     skin.success("Crop updated")
                 else:
@@ -711,7 +711,7 @@ def repl():
     skin.print_goodbye()
 
 
-def _repl_zoom(args, skin):
+def _repl_zoom(args, skin, pt_session=None):
     """Handle zoom subcommands in REPL."""
     if not args:
         skin.error("Usage: zoom list|add|rm <id>")
@@ -722,11 +722,11 @@ def _repl_zoom(args, skin):
         output(result)
     elif sub == "add":
         skin.info("Add zoom region:")
-        start = int(input("  start_ms: "))
-        end = int(input("  end_ms: "))
-        depth = int(input("  depth (1-6, default 3): ") or "3")
-        fx = float(input("  focus_x (0-1, default 0.5): ") or "0.5")
-        fy = float(input("  focus_y (0-1, default 0.5): ") or "0.5")
+        start = int(skin.sub_input("  start_ms: ", pt_session))
+        end = int(skin.sub_input("  end_ms: ", pt_session))
+        depth = int(skin.sub_input("  depth (1-6, default 3): ", pt_session) or "3")
+        fx = float(skin.sub_input("  focus_x (0-1, default 0.5): ", pt_session) or "0.5")
+        fy = float(skin.sub_input("  focus_y (0-1, default 0.5): ", pt_session) or "0.5")
         result = tl_mod.add_zoom_region(_session, start, end, depth, fx, fy)
         skin.success(f"Added zoom: {result['id']}")
     elif sub == "rm" and len(args) > 1:
@@ -736,7 +736,7 @@ def _repl_zoom(args, skin):
         skin.error("Usage: zoom list|add|rm <id>")
 
 
-def _repl_speed(args, skin):
+def _repl_speed(args, skin, pt_session=None):
     """Handle speed subcommands in REPL."""
     if not args:
         skin.error("Usage: speed list|add|rm <id>")
@@ -747,9 +747,9 @@ def _repl_speed(args, skin):
         output(result)
     elif sub == "add":
         skin.info("Add speed region:")
-        start = int(input("  start_ms: "))
-        end = int(input("  end_ms: "))
-        spd = float(input("  speed (0.25-2.0, default 1.5): ") or "1.5")
+        start = int(skin.sub_input("  start_ms: ", pt_session))
+        end = int(skin.sub_input("  end_ms: ", pt_session))
+        spd = float(skin.sub_input("  speed (0.25-2.0, default 1.5): ", pt_session) or "1.5")
         result = tl_mod.add_speed_region(_session, start, end, spd)
         skin.success(f"Added speed: {result['id']}")
     elif sub == "rm" and len(args) > 1:
@@ -759,7 +759,7 @@ def _repl_speed(args, skin):
         skin.error("Usage: speed list|add|rm <id>")
 
 
-def _repl_trim(args, skin):
+def _repl_trim(args, skin, pt_session=None):
     """Handle trim subcommands in REPL."""
     if not args:
         skin.error("Usage: trim list|add|rm <id>")
@@ -770,8 +770,8 @@ def _repl_trim(args, skin):
         output(result)
     elif sub == "add":
         skin.info("Add trim region:")
-        start = int(input("  start_ms: "))
-        end = int(input("  end_ms: "))
+        start = int(skin.sub_input("  start_ms: ", pt_session))
+        end = int(skin.sub_input("  end_ms: ", pt_session))
         result = tl_mod.add_trim_region(_session, start, end)
         skin.success(f"Added trim: {result['id']}")
     elif sub == "rm" and len(args) > 1:

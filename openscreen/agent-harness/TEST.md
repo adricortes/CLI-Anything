@@ -90,34 +90,35 @@
 | 75 | TestIntegration::test_timeline_boundaries | PASSED |
 | 76 | TestIntegration::test_active_regions_at | PASSED |
 | 77 | TestIntegration::test_project_set_triggers_undo | PASSED |
+| 78 | TestProject::test_crop_region_overflow_raises | PASSED |
 
 ### test_full_e2e.py — End-to-End Tests (23 tests, requires ffmpeg)
 
 | # | Test | Status |
 |---|------|--------|
-| 78 | TestMediaE2E::test_probe_real_video | PASSED |
-| 79 | TestMediaE2E::test_check_video | PASSED |
-| 80 | TestMediaE2E::test_check_invalid_video | PASSED |
-| 81 | TestMediaE2E::test_extract_thumbnail | PASSED |
-| 82 | TestMediaE2E::test_extract_thumbnail_at_zero | PASSED |
-| 83 | TestMediaE2E::test_extract_frames | PASSED |
-| 84 | TestMediaE2E::test_ffmpeg_and_ffprobe_found | PASSED |
-| 85 | TestExportE2E::test_basic_export | PASSED |
-| 86 | TestExportE2E::test_export_with_zoom | PASSED |
-| 87 | TestExportE2E::test_export_with_speed | PASSED |
-| 88 | TestExportE2E::test_export_with_trim | PASSED |
-| 89 | TestExportE2E::test_export_complex | PASSED |
-| 90 | TestExportE2E::test_export_no_video_raises | PASSED |
-| 91 | TestExportE2E::test_export_missing_video_raises | PASSED |
-| 92 | TestCLISubprocess::test_cli_help | PASSED |
-| 93 | TestCLISubprocess::test_cli_version | PASSED |
-| 94 | TestCLISubprocess::test_cli_export_presets | PASSED |
-| 95 | TestCLISubprocess::test_cli_media_probe | PASSED |
-| 96 | TestCLISubprocess::test_cli_project_new_json | PASSED |
-| 97 | TestCLISubprocess::test_cli_zoom_add | PASSED |
-| 98 | TestCLISubprocess::test_cli_full_workflow | PASSED |
-| 99 | TestCLISubprocess::test_cli_media_check_valid | PASSED |
-| 100 | TestCLISubprocess::test_cli_session_status | PASSED |
+| 79 | TestMediaE2E::test_probe_real_video | PASSED |
+| 80 | TestMediaE2E::test_check_video | PASSED |
+| 81 | TestMediaE2E::test_check_invalid_video | PASSED |
+| 82 | TestMediaE2E::test_extract_thumbnail | PASSED |
+| 83 | TestMediaE2E::test_extract_thumbnail_at_zero | PASSED |
+| 84 | TestMediaE2E::test_extract_frames | PASSED |
+| 85 | TestMediaE2E::test_ffmpeg_and_ffprobe_found | PASSED |
+| 86 | TestExportE2E::test_basic_export | PASSED |
+| 87 | TestExportE2E::test_export_with_zoom | PASSED |
+| 88 | TestExportE2E::test_export_with_speed | PASSED |
+| 89 | TestExportE2E::test_export_with_trim | PASSED |
+| 90 | TestExportE2E::test_export_complex | PASSED |
+| 91 | TestExportE2E::test_export_no_video_raises | PASSED |
+| 92 | TestExportE2E::test_export_missing_video_raises | PASSED |
+| 93 | TestCLISubprocess::test_cli_help | PASSED |
+| 94 | TestCLISubprocess::test_cli_version | PASSED |
+| 95 | TestCLISubprocess::test_cli_export_presets | PASSED |
+| 96 | TestCLISubprocess::test_cli_media_probe | PASSED |
+| 97 | TestCLISubprocess::test_cli_project_new_json | PASSED |
+| 98 | TestCLISubprocess::test_cli_zoom_add | PASSED |
+| 99 | TestCLISubprocess::test_cli_full_workflow | PASSED |
+| 100 | TestCLISubprocess::test_cli_media_check_valid | PASSED |
+| 101 | TestCLISubprocess::test_cli_session_status | PASSED |
 
 ## Raw pytest output
 
