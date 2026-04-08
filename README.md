@@ -918,6 +918,13 @@ Each application received complete, production-ready CLI interfaces — not demo
 <td align="center">✅ 40</td>
 </tr>
 <tr>
+<td align="center"><strong>☁️ <a href="cloudanalyzer/agent-harness/">CloudAnalyzer</a></strong></td>
+<td>Point cloud / trajectory QA</td>
+<td><code>cli-anything-cloudanalyzer</code></td>
+<td>CloudAnalyzer (Python API)</td>
+<td align="center">✅ 14</td>
+</tr>
+<tr>
 <td align="center" colspan="4"><strong>Total</strong></td>
 <td align="center"><strong>✅ 2,045</strong></td>
 </tr>
@@ -960,8 +967,9 @@ ollama         98 passed  ✅   (87 unit + 11 e2e)
 sketch         19 passed  ✅   (19 jest, Node.js)
 renderdoc      59 passed  ✅   (45 unit + 14 e2e)
 cloudcompare   88 passed  ✅   (49 unit + 39 e2e)
+cloudanalyzer  14 passed  ✅   (7 unit + 7 e2e)
 ──────────────────────────────────────────────────────────────────────────────
-TOTAL        2,005 passed  ✅   100% pass rate
+TOTAL        2,019 passed  ✅   100% pass rate
 ```
 
 ---
@@ -1036,7 +1044,8 @@ cli-anything/
 ├── 🔬 renderdoc/agent-harness/          # RenderDoc CLI (59 tests)
 ├── 🎬 videocaptioner/agent-harness/     # VideoCaptioner CLI (26 tests)
 ├── ☁️ cloudcompare/agent-harness/       # CloudCompare CLI (88 tests)
-└── 🔍 exa/agent-harness/               # Exa CLI (40 tests)
+├── 🔍 exa/agent-harness/               # Exa CLI (40 tests)
+└── ⛅ cloudanalyzer/agent-harness/      # CloudAnalyzer CLI (14 tests)
 ```
 
 Each `agent-harness/` contains an installable Python package under `cli_anything.<software>/` with Click CLI, core modules, utils (including `repl_skin.py` and backend wrapper), and comprehensive tests.
